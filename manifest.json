@@ -1,0 +1,25 @@
+{
+  "short_name": "Movie Explorer",
+  "name": "Movie Explorer",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "16x16 32x32 48x48 64x64",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "file.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "file.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#6366f1",
+  "background_color": "#1a1623"
+}
