@@ -1,0 +1,449 @@
+/* ===== MOVIE CARD STYLES - OPTIMIZADO PARA CLS ===== */
+.movie-card {
+    position: relative;
+    width: 100%;
+    max-width: 275px;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    /* Reservar espacio fijo para prevenir layout shift */
+    height: 400px;
+}
+
+.movie-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+.movie-card-content {
+    position: relative;
+    background-color: #1a1623;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Usar toda la altura del contenedor */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+.movie-card-content:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.25);
+}
+
+/* ===== CONTENEDOR DE IMAGEN - ASPECT RATIO FIJO ===== */
+.movie-card-img-container {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    /* Aspect ratio fijo para posters de películas (2:3) */
+    aspect-ratio: 2 / 3;
+    background-color: #1a1623;
+    /* Skeleton loading background */
+    background-image: linear-gradient(
+        90deg,
+        #1a1623 0%,
+        #252032 50%,
+        #1a1623 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 2s infinite;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.movie-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: #1a1623;
+    transition: filter 0.3s ease, transform 0.3s ease;
+    /* Prevenir layout shift durante carga */
+    display: block;
+    /* Dimensiones explícitas para evitar CLS */
+    min-height: 100%;
+}
+
+/* Placeholder para cuando no hay imagen */
+.movie-poster-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1623 0%, #252032 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 3rem;
+}
+
+/* Overlay gradient que aparece en hover */
+.movie-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        transparent 50%,
+        rgba(0, 0, 0, 0.7) 85%,
+        rgba(0, 0, 0, 0.9) 100%
+    );
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    /* Prevenir que cause layout shift */
+    pointer-events: none;
+}
+
+.movie-card-content:hover .movie-card-overlay {
+    opacity: 1;
+}
+
+.movie-card-content:hover .movie-poster {
+    filter: blur(1px) brightness(0.8);
+    transform: scale(1.05);
+}
+
+/* ===== BOTÓN DE WATCHLIST - POSICIÓN ABSOLUTA FIJA ===== */
+.save-button {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    color: red;
+    font-size: 16px;
+    /* Evitar que el botón cause layout shift */
+    transform-origin: center;
+}
+
+.save-button:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.1);
+}
+
+.save-button i {
+    transition: color 0.2s ease;
+    /* Dimensiones fijas para los iconos */
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== RATING CIRCULAR - DIMENSIONES FIJAS ===== */
+.rating-circle {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 50px;
+    height: 50px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    transition: transform 0.2s ease;
+    /* Evitar layout shift */
+    transform-origin: center;
+}
+
+.rating-circle:hover {
+    transform: scale(1.05);
+}
+
+.rating-svg {
+    width: 46px;
+    height: 46px;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transform: rotate(-90deg);
+    /* Evitar que el SVG cause layout shift */
+    display: block;
+}
+
+.rating-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.2);
+    stroke-width: 2;
+}
+
+.rating-progress {
+    fill: none;
+    stroke: var(--rating-color);
+    stroke-width: 2;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.3s ease;
+}
+
+.rating-text {
+    position: relative;
+    z-index: 1;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    /* Evitar que el texto cause layout shift */
+    min-width: 24px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== INFORMACIÓN DE LA PELÍCULA - ALTURA FIJA ===== */
+.movie-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(0, 0, 0, 0.8) 40%,
+        rgba(0, 0, 0, 0.95) 100%
+    );
+    z-index: 3;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* Altura fija para evitar layout shift */
+    height: 40%;
+    min-height: 180px;
+}
+
+.movie-card-content:hover .movie-info {
+    transform: translateY(0);
+}
+
+.movie-card-title {
+    font-size: 1.3rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.3;
+    /* Altura fija para evitar layout shift */
+    min-height: 2.6rem; /* 1.3rem * 2 lines */
+}
+
+.movie-card-date {
+    font-size: 1rem;
+    color: #ffd700;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* Altura fija */
+    min-height: 1.5rem;
+}
+
+.movie-card-date i {
+    font-size: 0.875rem;
+    /* Dimensiones fijas para el icono */
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.movie-card-description {
+    font-size: 0.95rem;
+    color: #e0e0e0;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+    /* Altura fija para evitar layout shift */
+    min-height: 5.7rem; /* 0.95rem * 1.5 line-height * 4 lines */
+}
+
+.movie-card-content:hover .movie-card-description {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== OPTIMIZACIÓN DE RENDIMIENTO ===== */
+.movie-card-content,
+.movie-poster,
+.movie-info {
+    will-change: auto;
+}
+
+.movie-card-content:hover,
+.movie-card-content:hover .movie-poster,
+.movie-card-content:hover .movie-info {
+    will-change: transform;
+}
+
+/* ===== RESPONSIVE DESIGN CON ALTURAS FIJAS ===== */
+@media (max-width: 768px) {
+    .movie-card {
+        height: 400px;
+    }
+    
+    .movie-card-content {
+        height: 100%;
+    }
+    
+    .movie-info {
+        min-height: 160px;
+    }
+    
+    .movie-card-title {
+        font-size: 1.1rem;
+        min-height: 2.2rem;
+    }
+    
+    .movie-card-description {
+        font-size: 0.9rem;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        min-height: 4.05rem;
+    }
+    
+    .rating-circle {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .rating-svg {
+        width: 41px;
+        height: 41px;
+    }
+    
+    .save-button {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+    
+    .save-button i {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .movie-card {
+        height: 350px;
+    }
+    
+    .movie-info {
+        min-height: 140px;
+    }
+    
+    .rating-circle {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .rating-svg {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .rating-text {
+        font-size: 11px;
+        min-width: 20px;
+    }
+    
+    .save-button {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+    
+    .save-button i {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+/* ===== MEJORAS ADICIONALES PARA CLS =====
+.movie-card * {
+    box-sizing: border-box;
+} */
+
+/* Evitar cambios de layout durante la carga de imágenes */
+.movie-poster[src] {
+    animation: fade-in 0.3s ease-in-out;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Preloader específico para contenido de texto */
+.movie-card-title:empty,
+.movie-card-date:empty,
+.movie-card-description:empty {
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: text-skeleton 2s infinite;
+    border-radius: 4px;
+}
+
+@keyframes text-skeleton {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}

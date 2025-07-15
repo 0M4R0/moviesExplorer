@@ -1,0 +1,272 @@
+/* Movie Detail Styles */
+.movie-card-detail {
+    min-height: 100vh;
+}
+
+.btn-back a {
+    display: flex;
+    text-decoration: none;
+    width: 80px;
+    height: 34px;
+}
+
+.btn-back {
+    margin: 20px;
+}
+
+.btn-back button {
+    background: #6365f1;
+    border-radius: 10px;
+    border: none;
+    width: 80px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    font-size: 1.2rem;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+.btn-back button:hover {
+    transform: scale(1.1);
+    background: var(--color-primary-hover);
+}
+
+.movie-card-detail-container {
+    z-index: 0;
+    position: relative;
+    display: flex;
+    gap: 2rem;
+    margin: 0 24px;
+    max-width: 1200px;
+    border: 1px solid #6365f100;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    overflow: hidden;
+}
+
+body.dark-mode .movie-card-detail-container {
+    box-shadow: 0 4px 7px 8px rgba(102, 43, 168, 0.2);
+    border: 1px solid #6365f19b;
+}
+
+.movie-card-detail-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(15px);
+    opacity: 0.6;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.movie-card-poster {
+    z-index: 1;
+    position: relative;
+    flex-shrink: 0;
+    width: 300px;
+    height: 450px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.416);
+    border: 1px solid #6365f19b;
+}
+
+body.dark-mode .movie-card-poster {
+    border: 1px solid #6365f1d4;
+    box-shadow: 0 4px 7px rgba(74, 46, 173, 0.2);
+}
+
+.movie-card-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.btn-save-watchlist {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+}
+
+.btn-save-watchlist button {
+    background: rgba(0, 0, 0, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+.fa-regular {
+    color: red;
+}
+
+.btn-save-watchlist button:hover {
+    transform: scale(1.1);
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.movie-card-info {
+    z-index: 1;
+    position: relative;
+    flex: 1;
+}
+
+.movie-card-info-container h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #000000;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .movie-card-info-container h1 {
+    color: #f3f4f6;
+}
+
+.movie-card-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin: 1rem 0;
+    color: #535353;
+    flex-wrap: wrap;
+}
+
+.movie-card-meta-item {
+    background-color: #ffffffd3;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+body.dark-mode .movie-card-meta-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #f3f4f6;
+}
+
+.movie-card-meta-item span {
+    font-weight: bold;
+}
+
+.movie-card-detail-rating-container {
+    margin: 1rem 0;
+}
+
+.rating-detail-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #6366f1, #8b5cf6);
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.movie-card-overview {
+    margin: 1.5rem 0;
+    line-height: 1.6;
+    color: #000000;
+}
+
+body.dark-mode .movie-card-overview {
+    color: #f3f4f6;
+}
+
+.movie-card-overview p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.movie-trailer {
+    margin-top: 2rem;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movie-trailer iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .movie-card-detail {
+        padding-top: 4rem;
+    }
+    
+    .movie-card-detail-container {
+        flex-direction: column;
+        margin: 1rem;
+        padding: 15px;
+    }
+
+    .movie-card-poster {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .movie-card-info-container h1 {
+        font-size: 1.5rem;
+    }
+
+    .movie-card-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .movie-trailer iframe {
+        height: 300px;
+    }
+
+    .get-back-home {
+        top: 60px;
+        left: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .movie-card-detail {
+        padding-top: 4rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    
+    .movie-card-poster {
+        height: 400px;
+    }
+    
+    .movie-card-info-container h1 {
+        font-size: 1.3rem;
+    }
+    
+    .movie-trailer iframe {
+        height: 250px;
+    }
+}

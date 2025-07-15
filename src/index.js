@@ -1,13 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import AppMovies from './AppMovies';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ROUTES } from './config/routes';
+import Home from './pages/Home';
+import MovieDetail from './pages/movieDetail';
+import SearchResults from './pages/SearchResults';
+import WatchList from './pages/WatchList';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Routes>
+        <Route path={ROUTES.HOME} element={<Home />} />
+        <Route path={ROUTES.MOVIE_DETAIL} element={<MovieDetail />} />
+        <Route path={ROUTES.SEARCH} element={<SearchResults />} />
+        <Route path={ROUTES.WATCHLIST} element={<WatchList />} />
+      </Routes>
+    </Router>
   </React.StrictMode>
 );
 

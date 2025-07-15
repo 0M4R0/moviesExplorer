@@ -1,0 +1,17 @@
+h1 {
+    margin-left: 20px;
+}
+
+h1 i {
+    margin-right: 10px;
+}
+
+.movie-count p {
+    width: 85px;
+    background-color: #6365f1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 20px;
+    color: white;
+    font-weight: bold;
+}
