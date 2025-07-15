@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../config/routes';
 import "./Navbar.css";
@@ -13,12 +13,16 @@ function Navbar() {
     const [isFixed, setIsFixed] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
+    const searchInputRef = useRef(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (searchQuery.trim()) {
             const encoded = encodeURIComponent(searchQuery.trim());
             navigate(`/search/${encoded}`);
+            if (searchInputRef.current) {
+                searchInputRef.current.blur();
+            }
         }
     };
 
@@ -26,14 +30,30 @@ function Navbar() {
         const newMode = !isDarkMode;
         setIsDarkMode(newMode);
         document.body.classList.toggle('dark-mode', newMode);
-        // Guardar el estado en localStorage
         localStorage.setItem('darkMode', JSON.stringify(newMode));
     };
 
     useEffect(() => {
-        // Aplicar el dark mode al body cuando cambia
         document.body.classList.toggle('dark-mode', isDarkMode);
     }, [isDarkMode]);
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            const input = document.querySelector('.search-input');
+            if (!input) return;
+
+            if (e.key === '/') {
+                e.preventDefault();
+                input.focus();
+            } else if (e.key === 'Escape') {
+                input.blur();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, []);
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -55,6 +75,7 @@ function Navbar() {
                 <div className="search-bar">
                     <form onSubmit={handleSubmit} className="search-form">
                         <input
+                            ref={searchInputRef}
                             type="text"
                             placeholder="Search movies..."
                             value={searchQuery}
@@ -62,6 +83,7 @@ function Navbar() {
                             className="search-input"
                             autoComplete="off"
                         />
+                        <div className="search-hint">/</div>
                         <button type="submit" className="search-button">
                             <i className="fa-solid fa-magnifying-glass"></i>
                         </button>

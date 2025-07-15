@@ -156,6 +156,26 @@ body {
     transform: translateY(-1px);
 }
 
+.search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding-left: 2.5rem;
+}
+
+.search-hint {
+    color: var(--color-primary);
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    pointer-events: none;
+    background-color: rgba(128, 128, 128, 0.379);
+}
+
+
 /* ===== NAV BUTTONS ===== */
 .nav-buttons {
     display: flex;
