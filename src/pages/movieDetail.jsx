@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { movieDetails, movieVideos } from '../api/tmdb';
-import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import SpinnerLoader from '../components/SpinnerLoader';
 import './MovieDetail.css';
@@ -78,8 +77,6 @@ function MovieDetail() {
 
     return (
         <div className="movie-card-detail">
-            <Navbar />
-
             <div className="btn-back">
                 <Link to="/">
                     <button type="button">

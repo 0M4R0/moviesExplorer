@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../config/routes';
 import "./Navbar.css";
 
@@ -12,11 +12,13 @@ function Navbar() {
     });
     const [isFixed, setIsFixed] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (searchQuery.trim()) {
-            window.location.href = `${ROUTES.SEARCH.replace(':query', encodeURIComponent(searchQuery.trim()))}`;
+            const encoded = encodeURIComponent(searchQuery.trim());
+            navigate(`/search/${encoded}`);
         }
     };
 

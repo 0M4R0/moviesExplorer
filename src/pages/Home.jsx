@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { fetchPopularMovies } from '../api/tmdb';
 import MovieGrid from '../components/MovieGrid';
-import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import SpinnerLoader from '../components/SpinnerLoader';
 import Pagination from '../components/Pagination';
@@ -36,7 +35,7 @@ function Home() {
         };
 
         loadMovies();
-    }, [location.search]);
+    }, [location.search, currentPage]);
 
     if (loading) {
         return <SpinnerLoader />;
@@ -44,7 +43,6 @@ function Home() {
 
     return (
         <div className="home-page">
-            <Navbar />
             <div className="movie-grid-container">
                 <MovieGrid movies={movies} />
             </div>

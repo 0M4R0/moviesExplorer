@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import MovieCard from '../components/MovieCard';
 import Pagination from '../components/Pagination';
@@ -34,7 +33,6 @@ function WatchList() {
 
     return (
         <div className="watchlist-container">
-            <Navbar />
 
             <main className="watchlist-main">
                 <h1>

@@ -3,7 +3,7 @@ export const ROUTES = {
     MOVIE_DETAIL: '/movie/:id',
     SEARCH: '/search/:query',
     WATCHLIST: '/watchlist',
-    NOT_FOUND: '*',
+    NOT_FOUND: '*', 
 };
 
 export const API_ROUTES = {

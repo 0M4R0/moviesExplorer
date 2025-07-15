@@ -66,7 +66,6 @@ function SearchResults() {
 
     return (
         <div className="search-results">
-            <Navbar />
             <div className="search-results-content">
                 <h2 className="search-results-title">Search Results for "{decodeURIComponent(query)}"</h2>
                 <div className="btn-back">
